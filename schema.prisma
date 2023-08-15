@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./src/prisma/client"  // Output path for Prisma client
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")  // Your MySQL database connection URL
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  username       String   @unique
+  email          String   @unique
+  hashedPassword String?
+  googleId       String?  @unique
+  discordId      String?  @unique
+  createdAt      DateTime @default(now())
+}
